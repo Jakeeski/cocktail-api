@@ -12,3 +12,4 @@ async function logJSONData() {
   const jsonData = await response.json();
   console.log(jsonData);
 }
+adadadafaf;
