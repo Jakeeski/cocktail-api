@@ -3,13 +3,39 @@
 let cocktailByNameApi =
   "www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
 
-let cocktailRandom = "www.thecocktaildb.com/api/json/v1/1/random.php";
+let drinkNames;
+let drinkData;
 
-async function logJSONData() {
-  const response = await fetch(
-    "www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita"
-  );
-  const jsonData = await response.json();
-  console.log(jsonData);
+fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic")
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    drinkData = data.drinks;
+    drinkNames = data.drinks[1].strDrink;
+    console.log(data);
+    console.log(drinkNames);
+    console.log(drinkData);
+    logDrinks(data);
+  });
+
+function logDrinks(data) {
+  for (let i = 0; i < 6; i++) {
+    console.log(data.drinks[i]);
+  }
 }
-adadadafaf;
+
+let userSearchInput = prompt("type in drink name");
+let searchUrl =
+  "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + userSearchInput;
+console.log(searchUrl);
+
+fetch(searchUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    for (let i = 0; i < 6; i++) {
+      console.log(data.drinks[i].strDrink);
+    }
+  });
