@@ -1,3 +1,41 @@
+* {
+    --color1: #919f89;
+    --color2: #e98354;
+    --color3: #9a604d;
+    --color4: #a99e8c;
+    --color5: #dec7a4;
+
+}
+body {
+    background-color: var(--color3);
+    color: var(--color5);
+}
+.navbar {
+    background-color: var(--color1);
+    color:#9a604d;
+    text-decoration: none;
+}
 .container {
-    background-color: purple;
+    background-color: var(--color2);
+}
+.nav-link {
+    text-decoration: none;
+    color: var(--color3);
+}
+.card-text {
+    color: var(--color3);
+    text-decoration: underline;
+}
+.card {
+    padding: 0;
+    border: 12px groove var(--color3);
+}
+.card-body {
+    background-color: var(--color1);
+}
+.card-text {
+    font-weight: bolder;
+    color: black;
+    text-align: center;
+    font-size: larger;
 }
