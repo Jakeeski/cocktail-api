@@ -92,8 +92,9 @@ let drinkThumbDisplay = (x) => {
 
 // create drink cards on html
 function cardDisplay(drinkData) {
-  console.log(drinkData.drinks.length)
-  for (let i = 18; i < 25; i++) { // i=0;i<drinkData.length;i++;
+  console.log(drinkData.drinks.length);
+  for (let i = 18; i < 25; i++) {
+    // i=0;i<drinkData.length;i++;
     //
     let cardDiv = $("<div>");
     cardDiv.attr("card", "card");
@@ -103,7 +104,7 @@ function cardDisplay(drinkData) {
     cardHeaderDiv
       .addClass("card-header")
       .text(`${drinkData.drinks[i].strDrink}`);
-    
+
     let cardBodyDiv = $("<div>");
     cardBodyDiv.addClass("card-body");
 
@@ -114,8 +115,8 @@ function cardDisplay(drinkData) {
 
     cardBodyDiv.append(cardImgDiv);
     cardDiv.append(cardHeaderDiv).append(cardBodyDiv).append(cardBodyDiv);
-    let modalId = "modal"+i;
-   let modalClass = `<div class="modal fade" id="${modalId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    let modalId = "modal" + i;
+    let modalClass = `<div class="modal fade" id="${modalId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -133,19 +134,16 @@ function cardDisplay(drinkData) {
         </div>
       </div>
     </div>
-  </div>`
-  let modalButton = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${modalId}">
+  </div>`;
+    let modalButton = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${modalId}">
  Show Detail
- </button>`
-cardDiv.append(modalClass).append(modalButton)
+ </button>`;
+    cardDiv.append(modalClass).append(modalButton);
 
     console.log(cardDiv);
     $("#cardContainer").append(cardDiv);
-    $("#modalTitle"+i).text(`${drinkData.drinks[i].strDrink}`)
+    $("#modalTitle" + i).text(`${drinkData.drinks[i].strDrink}`);
   }
 }
 
 // dynamically add modal content
-
-
- 
