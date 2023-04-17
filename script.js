@@ -59,6 +59,11 @@ async function getApi(URL) {
     drinkNamesDisplay(drinkData);
     drinkThumbDisplay(drinkData);
     cardDisplay(drinkData);
+    // display(drinkData);
+    // drinkObjectDisplay(drinkData);
+    // drinkNamesDisplay(drinkData);
+    // drinkThumbDisplay(drinkData);
+    // cardDisplay(drinkData);
     //
   } catch (error) {
     console.error(error);
