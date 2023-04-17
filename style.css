@@ -1,9 +1,9 @@
 * {
-    --color1: #919f89;
-    --color2: #e98354;
-    --color3: #9a604d;
-    --color4: #a99e8c;
-    --color5: #dec7a4;
+    --color1: rgb(145, 159, 137);
+    --color2: rgb(233, 131, 84);
+    --color3: rgb(154, 96, 77);
+    --color4: rgb(169, 158, 140);
+    --color5: rgb(222, 199, 164);
 
 }
 body {
@@ -17,7 +17,8 @@ body {
 }
 .container {
     background-color: var(--color2);
-}
+    border-radius: 25px;
+} 
 .nav-link {
     text-decoration: none;
     color: var(--color3);
@@ -28,6 +29,7 @@ body {
 }
 .card {
     padding: 0;
+    margin-bottom: 10px;
     border: 12px groove var(--color3);
 }
 .card-body {
