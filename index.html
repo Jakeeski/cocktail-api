@@ -31,10 +31,10 @@
               <a class="nav-link" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Drinks</a>
+              <a class="nav-link" href="#middle">Alcoholic</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Ingredients</a>
+              <a class="nav-link" href="#bottom">Non-Alcoholic</a>
             </li>
           </ul>
         </div>
@@ -46,14 +46,14 @@
   <div class="container mb-4 p-3 bubble">
     <h2>Random Drinks</h2>
     <button type="button"id= "GenerateBtn">Generate Drink</button>
-    <div class="row justify-content-around">
-      <div class="card" style="width: 18rem;">
+    <div class="row justify-content-around" id="randomDrink">
+      <!-- <div class="card" style="width: 18rem;">
         <img src="https://www.thecocktaildb.com/images/media/drink/uxywyw1468877224.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <p class="card-text">110 in the shade</p>
         </div>
       </div> -->
-      
+  
 
 
     </div>
@@ -63,7 +63,7 @@
   </div>
  
   <div class="container mb-4 p-3 bubble">
-    <h2>Alcoholic</h2>
+    <h2 id="middle">Alcoholic</h2>
     <div class="row justify-content-around" id="alcoholic-drinks">
       <!--  -->
       <!-- <div class="card" style="width: 18rem;">
@@ -78,7 +78,7 @@
   
 
   <div class="container mb-4 p-3 bubble">
-    <h2>Non-Alcoholic</h2>
+    <h2 id="bottom">Non-Alcoholic</h2>
     <div class="container-fluid">
       <div class="row justify-content-around" id="non-alcoholic-drinks">
         <!-- <div class="card" style="width: 18rem;">

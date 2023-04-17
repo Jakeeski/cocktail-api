@@ -122,8 +122,6 @@ function cardDisplay(drinkData) {
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalTitle${i}"></h5>
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
         <div class="modal-body">
           ...
@@ -176,8 +174,6 @@ function alcoholicDrinks() {
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalTitle${i}"></h5>
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
         <div class="modal-body">
           ...
@@ -228,16 +224,12 @@ function nonAlcoholicDrinks() {
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalTitle${i}"></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
         <div class="modal-body">
           ...
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
@@ -307,16 +299,12 @@ function randomDrink() {
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalTitle1"></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
         <div class="modal-body">
           <ul id="modalUL"></ul>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
