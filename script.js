@@ -54,11 +54,6 @@ async function getApi(URL) {
       );
     }
     drinkData = await response.json();
-    display(drinkData);
-    drinkObjectDisplay(drinkData);
-    drinkNamesDisplay(drinkData);
-    drinkThumbDisplay(drinkData);
-    cardDisplay(drinkData);
     // display(drinkData);
     // drinkObjectDisplay(drinkData);
     // drinkNamesDisplay(drinkData);
