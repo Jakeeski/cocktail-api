@@ -8,7 +8,7 @@
 }
 body {
     background-color: var(--color3);
-    color: black;
+    color: var(--color5);
 }
 .navbar {
     background-color: var(--color1);
@@ -24,9 +24,9 @@ body {
 }
 .card-text {
     color: var(--color3);
+    text-decoration: underline;
 }
 .card {
-    box-shadow: rgba(0, 0, 0, 0.50) 0px 5px 15px;
     padding: 0;
     border: 12px groove var(--color3);
 }
@@ -38,14 +38,4 @@ body {
     color: black;
     text-align: center;
     font-size: larger;
-}
-#randomDrink {
-    text-align: center;
-}
-.logo {
-    padding-right: 20px;
-}
-h2 {
-    text-decoration: underline;
-    text-underline-offset: 10px;
 }
