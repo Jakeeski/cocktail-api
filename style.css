@@ -15,7 +15,7 @@ body {
     color:#9a604d;
     text-decoration: none;
 }
-.container {
+.bubble {
     background-color: var(--color2);
     border-radius: 25px;
 } 
