@@ -59,7 +59,8 @@ async function getApi(URL) {
     // drinkNamesDisplay(drinkData);
     // drinkThumbDisplay(drinkData);
     // cardDisplay(drinkData);
-    //
+    alcoholicDrinks();
+    nonAlcoholicDrinks();
   } catch (error) {
     console.error(error);
   }
@@ -142,6 +143,114 @@ function cardDisplay(drinkData) {
 
     console.log(cardDiv);
     $("#cardContainer").append(cardDiv);
+    $("#modalTitle" + i).text(`${drinkData.drinks[i].strDrink}`);
+  }
+}
+
+function alcoholicDrinks() {
+  for (let i = 18; i < 26; i++) {
+    let cardDiv = $("<div>");
+    cardDiv.attr("class", "card");
+    cardDiv.attr("style", "width: 18rem;");
+
+    let cardImgDiv = $("<img>");
+    cardImgDiv
+      .addClass("card-img-top")
+      .attr("src", `${drinkData.drinks[i].strDrinkThumb}`);
+
+    // cardHeaderDiv
+    let cardBody = $("<div>");
+    cardBody.addClass("card-body");
+
+    let cardText = $("<p>");
+    cardText.text(`${drinkData.drinks[i].strDrink}`);
+
+    let cardBodyDiv = $("<div>");
+    cardBodyDiv.addClass("card-body");
+
+    $("#alcoholic-drinks").append(cardDiv);
+    $(cardDiv).append(cardImgDiv).append(cardBody);
+    $(cardBody).append(cardText);
+
+    let modalId = "modal" + i;
+    let modalClass = `<div class="modal fade" id="${modalId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle${i}"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+    let modalButton = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${modalId}">
+ Show Detail
+ </button>`;
+
+    cardDiv.append(modalClass).append(modalButton);
+    $("#modalTitle" + i).text(`${drinkData.drinks[i].strDrink}`);
+  }
+}
+
+function nonAlcoholicDrinks() {
+  for (let i = 18; i < 22; i++) {
+    let cardDiv = $("<div>");
+    cardDiv.attr("class", "card");
+    cardDiv.attr("style", "width: 18rem;");
+
+    let cardImgDiv = $("<img>");
+    cardImgDiv
+      .addClass("card-img-top")
+      .attr("src", `${drinkData.drinks[i].strDrinkThumb}`);
+
+    // cardHeaderDiv
+    let cardBody = $("<div>");
+    cardBody.addClass("card-body");
+
+    let cardText = $("<p>");
+    cardText.text(`${drinkData.drinks[i].strDrink}`);
+
+    let cardBodyDiv = $("<div>");
+    cardBodyDiv.addClass("card-body");
+
+    $("#non-alcoholic-drinks").append(cardDiv);
+    $(cardDiv).append(cardImgDiv).append(cardBody);
+    $(cardBody).append(cardText);
+
+    let modalId = "modal" + i;
+    let modalClass = `<div class="modal fade" id="${modalId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle${i}"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+    let modalButton = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${modalId}">
+ Show Detail
+ </button>`;
+
+    cardDiv.append(modalClass).append(modalButton);
     $("#modalTitle" + i).text(`${drinkData.drinks[i].strDrink}`);
   }
 }
