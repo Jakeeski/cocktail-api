@@ -54,11 +54,11 @@ async function getApi(URL) {
       );
     }
     drinkData = await response.json();
-    display(drinkData);
-    drinkObjectDisplay(drinkData);
-    drinkNamesDisplay(drinkData);
-    drinkThumbDisplay(drinkData);
-    cardDisplay(drinkData);
+    // display(drinkData);
+    // drinkObjectDisplay(drinkData);
+    // drinkNamesDisplay(drinkData);
+    // drinkThumbDisplay(drinkData);
+    // cardDisplay(drinkData);
     //
   } catch (error) {
     console.error(error);
@@ -144,8 +144,6 @@ cardDiv.append(modalClass).append(modalButton)
     $("#modalTitle"+i).text(`${drinkData.drinks[i].strDrink}`)
   }
 }
-
-// dynamically add modal content
 
 
  
