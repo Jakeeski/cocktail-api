@@ -85,14 +85,31 @@ function alcoholicDrinks(i) {
 
   ingredients = ingredients.filter((ingredient) => ingredient !== null);
   for (let j = 0; j < ingredients.length; j++) {
-    console.log(ingredients);
     let modalitem = $("<li>");
     modalitem.text(ingredients[j]);
     $(`.ul${i}`).append(modalitem);
     console.log(modalitem);
   }
 }
+async function nonAlcoholicDisplay() {
+  try {
+    const response = await fetch(
+      "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic"
+    );
+    display(response);
 
+    if (!response.ok) {
+      throw new Error(
+        `Failed to retrieve data: ${response.status} ${response.statusText}`
+      );
+    }
+    drinkData = await response.json();
+
+    nonAlcoholicDrinks();
+  } catch (error) {
+    console.error(error);
+  }
+}
 function nonAlcoholicDrinks() {
   for (let i = 18; i < 22; i++) {
     let cardDiv = $("<div>");
@@ -117,32 +134,9 @@ function nonAlcoholicDrinks() {
     $("#non-alcoholic-drinks").append(cardDiv);
     $(cardDiv).append(cardImgDiv).append(cardBody);
     $(cardBody).append(cardText);
-
-    let modalId = "modal" + i;
-    let modalClass = `<div class="modal fade" id="${modalId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalTitle${i}"></h5>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>`;
-    let modalButton = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${modalId}">
- Show Detail
- </button>`;
-
-    cardDiv.append(modalClass).append(modalButton);
-    $("#modalTitle" + i).text(`${drinkData.drinks[i].strDrink}`);
   }
 }
-
+nonAlcoholicDisplay();
 async function randomApi() {
   try {
     const response = await fetch(
@@ -229,11 +223,51 @@ function randomDrink() {
     $("#modalUL").append(modalitem);
   }
 }
+let storageParse;
+
+function pullStorage() {
+  storageParse = JSON.parse(localStorage.getItem("searchResults"));
+}
+
+function checkStorage(searchInput) {
+  if (storageParse === null) {
+    storageParse = [];
+  }
+  if (!storageParse.includes(searchInput)) {
+    storageParse.unshift(searchInput);
+    if (storageParse.length >= 10) {
+      storageParse.pop();
+    }
+    localStorage.setItem("searchResults", JSON.stringify(storageParse));
+  }
+}
+
+function previousSearchDisplay() {
+  $("#previousSearch").empty();
+  for (let i = 0; i < storageParse.length; i++) {
+    let previousSearchBtn = $("<button>");
+    previousSearchBtn.attr("style", "height: 50px");
+
+    previousSearchBtn.text(storageParse[i]);
+    previousSearchBtn.attr("class", "previous");
+    $("#previousSearch").append(previousSearchBtn);
+    previousSearchBtn.click(searchApi);
+    // previousSearchBtn.val() = searchInput
+  }
+}
+pullStorage();
+previousSearchDisplay();
 async function searchApi(event) {
   event.preventDefault();
-  console.log("searchApi");
-  let searchInput = $(".searchBar").val();
-  console.log(searchInput);
+  let searchInput;
+  if (event.target.className === "previous") {
+    searchInput = event.target.textContent;
+  } else {
+    searchInput = $(".searchBar").val();
+  }
+  pullStorage();
+  checkStorage(searchInput);
+  previousSearchDisplay();
   try {
     const response = await fetch(
       "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + searchInput
@@ -259,7 +293,7 @@ function searchDisplay() {
     console.log("TESTESTTEST");
     $("#search-drinks").empty();
   }
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 3; i++) {
     let cardDiv = $("<div>");
     cardDiv.attr("class", "card");
     cardDiv.attr("style", "width: 18rem;");
@@ -314,7 +348,6 @@ function searchDisplay() {
 
     ingredients = ingredients.filter((ingredient) => ingredient !== null);
     for (let j = 0; j < ingredients.length; j++) {
-      console.log(ingredients);
       let modalitem = $("<li>");
       modalitem.text(ingredients[j]);
       $(`.ul${i}`).append(modalitem);
