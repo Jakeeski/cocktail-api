@@ -10,6 +10,7 @@ async function getApi(URL) {
           `Failed to retrieve data: ${response.status} ${response.statusText}`
         );
       }
+
       drinkData = await response.json();
       console.log(drinkData);
       alcoholicDrinks(i);
@@ -290,7 +291,7 @@ function searchDisplay() {
           <h5 class="modal-title" id="modalTitle${i}"></h5>
         </div>
         <div class="modal-body">
-          ...
+        <ul class="ul${i}"></ul>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -304,6 +305,21 @@ function searchDisplay() {
 
     cardDiv.append(modalClass).append(modalButton);
     $("#modalTitle" + i).text(`${searchResults.drinks[i].strDrink}`);
+
+    var ingredients = [];
+
+    for (var k = 1; k < 15; k++) {
+      ingredients.push(drinkData.drinks[0]["strIngredient" + k]);
+    }
+
+    ingredients = ingredients.filter((ingredient) => ingredient !== null);
+    for (let j = 0; j < ingredients.length; j++) {
+      console.log(ingredients);
+      let modalitem = $("<li>");
+      modalitem.text(ingredients[j]);
+      $(`.ul${i}`).append(modalitem);
+      console.log(modalitem);
+    }
   }
 }
 
