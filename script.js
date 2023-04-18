@@ -1,47 +1,3 @@
-// variables for apis
-
-/* let cocktailByNameApi =
-  "www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
-
-let drinkNames;
-let drinkData;
-
-fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic")
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    drinkData = data.drinks;
-    drinkNames = data.drinks[1].strDrink;
-    console.log(data);
-    console.log(drinkNames);
-    console.log(drinkData);
-    logDrinks(data);
-  });
-
-function logDrinks(data) {
-  for (let i = 0; i < 6; i++) {
-    console.log(data.drinks[i]);
-  }
-}
-
-let userSearchInput = prompt("type in drink name");
-let searchUrl =
-  "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + userSearchInput;
-console.log(searchUrl);
-
-fetch(searchUrl)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    for (let i = 0; i < 6; i++) {
-      console.log(data.drinks[i].strDrink);
-      console.log(data.drinks[i].strDrinkThumb);
-    }
-  });
- */
-
 // getApi for main display
 async function getApi(URL) {
   try {
@@ -54,11 +10,7 @@ async function getApi(URL) {
       );
     }
     drinkData = await response.json();
-    // display(drinkData);
-    // drinkObjectDisplay(drinkData);
-    // drinkNamesDisplay(drinkData);
-    // drinkThumbDisplay(drinkData);
-    // cardDisplay(drinkData);
+    console.log(drinkData);
     alcoholicDrinks();
     nonAlcoholicDrinks();
   } catch (error) {
@@ -72,76 +24,6 @@ getApi("https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic");
 let display = (x) => {
   console.log(x);
 };
-
-let drinkObjectDisplay = (x) => {
-  for (let i = 0; i < 3; i++) {
-    console.log(x.drinks[i]);
-  }
-};
-
-let drinkNamesDisplay = (x) => {
-  for (let i = 0; i < 3; i++) {
-    console.log(x.drinks[i].strDrink);
-  }
-};
-
-let drinkThumbDisplay = (x) => {
-  for (let i = 0; i < 3; i++) {
-    console.log(x.drinks[i].strDrinkThumb);
-  }
-};
-
-// create drink cards on html
-function cardDisplay(drinkData) {
-  console.log(drinkData.drinks.length);
-  for (let i = 18; i < 25; i++) {
-    // i=0;i<drinkData.length;i++;
-    //
-    let cardDiv = $("<div>");
-    cardDiv.attr("card", "card");
-    cardDiv.attr("style", "width: 300px;");
-
-    let cardHeaderDiv = $("<div>");
-    cardHeaderDiv
-      .addClass("card-header")
-      .text(`${drinkData.drinks[i].strDrink}`);
-
-    let cardBodyDiv = $("<div>");
-    cardBodyDiv.addClass("card-body");
-
-    let cardImgDiv = $("<img>");
-    cardImgDiv
-      .addClass("card-img-bottom")
-      .attr("src", `${drinkData.drinks[i].strDrinkThumb}`);
-
-    cardBodyDiv.append(cardImgDiv);
-    cardDiv.append(cardHeaderDiv).append(cardBodyDiv).append(cardBodyDiv);
-    let modalId = "modal" + i;
-    let modalClass = `<div class="modal fade" id="${modalId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalTitle${i}"></h5>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>`;
-    let modalButton = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${modalId}">
- Show Detail
- </button>`;
-    cardDiv.append(modalClass).append(modalButton);
-
-    console.log(cardDiv);
-    $("#cardContainer").append(cardDiv);
-    $("#modalTitle" + i).text(`${drinkData.drinks[i].strDrink}`);
-  }
-}
 
 function alcoholicDrinks() {
   for (let i = 18; i < 26; i++) {
@@ -329,5 +211,83 @@ function randomDrink() {
     $("#modalUL").append(modalitem);
   }
 }
+async function searchApi(event) {
+  event.preventDefault();
+  console.log("searchApi");
+  let searchInput = $(".searchBar").val();
+  console.log(searchInput);
+  try {
+    const response = await fetch(
+      "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + searchInput
+    );
+    display(response);
 
-randomDrink();
+    if (!response.ok) {
+      throw new Error(
+        `Failed to retrieve data: ${response.status} ${response.statusText}`
+      );
+    }
+    searchResults = await response.json();
+    console.log(searchResults);
+    console.log(searchResults.drinks[0].strDrink);
+    console.log(searchResults.drinks[0].strDrinkThumb);
+    searchDisplay();
+  } catch (error) {
+    console.log(error);
+  }
+}
+function searchDisplay() {
+  while ($("#search-drinks").children().length > 0) {
+    console.log("TESTESTTEST");
+    $("#search-drinks").empty();
+  }
+  for (let i = 0; i < 6; i++) {
+    let cardDiv = $("<div>");
+    cardDiv.attr("class", "card");
+    cardDiv.attr("style", "width: 18rem;");
+
+    let cardImgDiv = $("<img>");
+    cardImgDiv
+      .addClass("card-img-top")
+      .attr("src", `${searchResults.drinks[i].strDrinkThumb}`);
+
+    // cardHeaderDiv
+    let cardBody = $("<div>");
+    cardBody.addClass("card-body");
+
+    let cardText = $("<p>");
+    cardText.text(`${searchResults.drinks[i].strDrink}`);
+
+    let cardBodyDiv = $("<div>");
+    cardBodyDiv.addClass("card-body");
+
+    $("#search-drinks").append(cardDiv);
+    $(cardDiv).append(cardImgDiv).append(cardBody);
+    $(cardBody).append(cardText);
+
+    let modalId = "modal" + i;
+    let modalClass = `<div class="modal fade" id="${modalId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle${i}"></h5>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+    let modalButton = `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${modalId}">
+ Show Detail
+ </button>`;
+
+    cardDiv.append(modalClass).append(modalButton);
+    $("#modalTitle" + i).text(`${searchResults.drinks[i].strDrink}`);
+  }
+}
+
+$("#searchBtn").click(searchApi);
