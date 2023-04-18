@@ -56,4 +56,6 @@ body {
     display: block;
     margin: 0 auto;
     border: solid 2px black;
+    background-color: var(--color1);
+    border-radius: 25px;
 }
