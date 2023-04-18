@@ -6,39 +6,54 @@
     --color5: rgb(222, 199, 164);
 
 }
+
 body {
     background-color: var(--color3);
     color: var(--color5);
 }
+
 .navbar {
     background-color: var(--color1);
-    color:#9a604d;
+    color: #9a604d;
     text-decoration: none;
 }
+
 .bubble {
     background-color: var(--color2);
     border-radius: 25px;
-} 
+}
+
 .nav-link {
     text-decoration: none;
     color: var(--color3);
 }
+
 .card-text {
     color: var(--color3);
     text-decoration: underline;
 }
+
 .card {
     padding: 0;
     margin-bottom: 10px;
     border: 12px groove var(--color3);
 }
+
 .card-body {
     background-color: var(--color1);
 }
+
 .card-text {
     font-weight: bolder;
     color: black;
     text-align: center;
     font-size: larger;
 }
-#GenerateBtn{ width: fit-content; height: fit-content;}
+
+#GenerateBtn {
+    /* width: fit-content; */
+    /* height: fit-content; */
+    display: block;
+    margin: 0 auto;
+    border: solid 2px black;
+}
