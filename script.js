@@ -12,10 +12,9 @@ async function getApi(URL) {
       }
 
       drinkData = await response.json();
-      console.log(drinkData);
+
       alcoholicDrinks(i);
       /* nonAlcoholicDrinks(); */
-      console.log(drinkData.drinks[0].strDrinkThumb);
     } catch (error) {
       console.error(error);
     }
@@ -24,9 +23,7 @@ async function getApi(URL) {
 getApi("https://www.thecocktaildb.com/api/json/v1/1/random.php");
 
 // Simple display arrow functions
-let display = (x) => {
-  console.log(x);
-};
+let display = (x) => {};
 
 function alcoholicDrinks(i) {
   /* for (let i = 18; i < 26; i++) { */
@@ -54,7 +51,7 @@ function alcoholicDrinks(i) {
   $(cardBody).append(cardText);
 
   let modalId = "modal" + i;
-  console.log(modalId);
+
   let modalClass = `<div class="modal fade" id="${modalId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -88,7 +85,6 @@ function alcoholicDrinks(i) {
     let modalitem = $("<li>");
     modalitem.text(ingredients[j]);
     $(`.ul${i}`).append(modalitem);
-    console.log(modalitem);
   }
 }
 async function nonAlcoholicDisplay() {
@@ -223,7 +219,7 @@ function randomDrink() {
     $("#modalUL").append(modalitem);
   }
 }
-let storageParse;
+let storageParse = [];
 
 function pullStorage() {
   storageParse = JSON.parse(localStorage.getItem("searchResults"));
@@ -244,19 +240,23 @@ function checkStorage(searchInput) {
 
 function previousSearchDisplay() {
   $("#previousSearch").empty();
-  for (let i = 0; i < storageParse.length; i++) {
-    let previousSearchBtn = $("<button>");
-    previousSearchBtn.attr("style", "height: 50px");
-
-    previousSearchBtn.text(storageParse[i]);
-    previousSearchBtn.attr("class", "previous");
-    $("#previousSearch").append(previousSearchBtn);
-    previousSearchBtn.click(searchApi);
-    // previousSearchBtn.val() = searchInput
+  console.log(storageParse);
+  if (storageParse) {
+    for (let i = 0; i < storageParse.length; i++) {
+      console.log("wokring in storage");
+      let previousSearchBtn = $("<button>");
+      previousSearchBtn.attr("style", "height: 50px");
+      previousSearchBtn.text(storageParse[i]);
+      previousSearchBtn.attr("class", "previous");
+      $("#previousSearch").append(previousSearchBtn);
+      previousSearchBtn.click(searchApi);
+    }
   }
 }
 pullStorage();
+
 previousSearchDisplay();
+
 async function searchApi(event) {
   event.preventDefault();
   let searchInput;
@@ -351,7 +351,6 @@ function searchDisplay() {
       let modalitem = $("<li>");
       modalitem.text(ingredients[j]);
       $(`.ul${i}`).append(modalitem);
-      console.log(modalitem);
     }
   }
 }
